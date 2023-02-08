@@ -1,0 +1,632 @@
+DECLARE
+     
+     empno number:=100;
+...............
+BEGIN
+
+aLL EXECUTABLE STATEMENTS
+
+
+EXCEPTION
+
+TO HANDILE THE EXCEPTIONS
+
+
+END;
+
+
+Type your code in a text editor, like Notepad, Notepad+, or EditPlus, etc.
+
+Save the file with the .sql extension in the home directory.
+
+Launch the SQL*Plus command prompt from the directory where you created your PL/SQL file.
+
+Type @file_name at the SQL*Plus command prompt to execute your program.
+
+
+
+
+basic.sql
+
+DECLARE
+BEGIN
+dbms_output.put_line('Hello world');
+dbms_output.put_line('Hello world');
+dbms_output.put_line('Hello world');
+dbms_output.put_line('Hello world');
+dbms_output.put_line('Hello world');
+dbms_output.put_line('Hello world');
+dbms_output.put_line('Hello world');
+dbms_output.put_line('Hello world');
+END;
+/
+
+
+c:\natWest\basic.sql
+
+c:\natWest\sqlplus hr/hr
+
+sql>@basic.sql
+... 	IF you are not getting the out
+
+sql> set serveroutput on
+
+
+
+DECLARE 
+ 
+   cname varchar2(30):= 'NIIT Ltd...';
+
+BEGIN
+dbms_output.put_line('Hello world' || cname || 'Welcome');
+end;
+/
+
+
+1. Add two numbers and print the value
+
+2. use two variable and swap the varaibales values with out using third variable
+
+
+DECLARE 
+ 
+   num1 number:=10;
+   num2 number:=20;
+
+BEGIN
+dbms_output.put_line(num1 || 'Before swap '  || num2);
+
+num1:=num1+num2;
+num2:=num1-num2;
+num1:=num1-num2;
+
+dbms_output.put_line(num1 || 'After swap '  || num2);
+
+end;
+/
+
+
+set serveroutput ON
+DECLARE 
+   a number:=100;
+   b number:=200;
+BEGIN
+
+IF (a > b) THEN
+dbms_output.put_line(' A IS GREATER THAN B');
+ELSE
+dbms_output.put_line(' B IS GREATER THAN A');
+END IF;
+
+end;
+/
+
+
+Question
+find greatest of three numbers
+
+
+IF (EXPRESSION)  THEN
+
+    ST1....
+ELSIF ()EXPRESSION
+
+ST.....
+
+ELSE
+....  END IF;
+
+
+Access Database
+---------------------------------------
+DECLARE
+c_id CUSTOMER.CUSTNO%TYPE :=101;
+c_custname CUSTOMER.CUSTNAME%TYPE;
+c_locate CUSTOMER.LOCATE%TYPE;
+c_email CUSTOMER.EMAIL%TYPE;
+BEGIN
+SELECT CUSTNAME,LOCATE,EMAIL INTO c_custname,c_locate,c_email 
+from customer
+where CUSTNO =c_id;
+DBMS_OUTPUT.PUT_LINE(' CUSTOMER Name ' || c_custname);
+DBMS_OUTPUT.PUT_LINE(' Location Name ' || c_locate);
+DBMS_OUTPUT.PUT_LINE(' Email Address ' || c_email);
+
+END;
+/
+
+
+create table emp(empno number primary key,empname varchar2(30),salary number(10),email varchar2(20));
+
+DECLARE
+e_empno number;
+e_empname varchar2(20);
+e_sal number;
+e_email varchar2(20);
+BEGIN
+insert into emp(empno,empname,salary,email)values(101,'Ramana',1000,'ramana@gmai.com');
+insert into emp(empno,empname,salary,email)values(102,'Venkat',2000,'venkat@gmai.com');
+insert into emp(empno,empname,salary,email)values(103,'Aman',1300,'aman@gmai.com');
+insert into emp(empno,empname,salary,email)values(104,'John',1500,'john@gmai.com');
+insert into emp(empno,empname,salary,email)values(105,'Sharma',4000,'sharma@gmai.com');
+commit;
+DBMS_OUTPUT.PUT_LINE('Record are Inserted');
+update emp set salary=7500 where empno=103;
+commit;
+DBMS_OUTPUT.PUT_LINE('Record is Updated');
+DELETE EMP WHERE empno=104;
+commit;
+DBMS_OUTPUT.PUT_LINE('Record is Deletedd');
+select empname, salary,email into e_empname,e_sal,e_email from emp where empno=103;
+DBMS_OUTPUT.PUT_LINE('emp No ' || empno);
+DBMS_OUTPUT.PUT_LINE('emp Name ' || e_empname);
+DBMS_OUTPUT.PUT_LINE('emm Salary ' || e_sal);
+DBMS_OUTPUT.PUT_LINE('emp email ' || e_eemail);
+end;
+/
+
+
+declare
+a number;
+b number;
+c number;
+begin
+DBMS_OUTPUT.PUT_LINE('Enter a value ');
+a:=&a;
+DBMS_OUTPUT.PUT_LINE('Enter b value ');
+b:=&b;
+c:=a+b;
+DBMS_OUTPUT.PUT_LINE('sum of a and b is ' || c);
+end;
+/
+
+Tea break
+
+From 5:15 pm to 5:45pm
+
+Thank you
+
+
+Coding
+
+1, Reverse No program
+2. Sum of the digits
+3.  Create Student table
+stno,stname, s1,s2,s3, total and average marks
+
+based on average find  grades
+
+>80  A
+
+60 - 80  B
+
+40-60   c
+
+< 40  fail
+
+
+Day2 PLSQL
+
+Procedures
+functions
+Cursors
+Triggers
+...etc
+
+DDL
+create
+DROP
+TRUNCATE
+
+
+DML
+INSERT
+UPDATE
+DELETE
+
+TCL
+COMMIT
+ROLLBACK
+SAVEPOINT
+
+qUERY
+Select
+
+Procedures
+------------
+
+Sytax
+
+create or replace procedure <name of procedure>( arg1  in/out <datatype,...etc)
+
+is/as
+<declaration 
+
+begin
+     statement
+exceptions
+      statements
+
+end;
+/
+
+----------------------------------------------------------
+
+
+create or replace procedure hello_proc(pname in varchar2)
+is
+declare
+
+begin
+DBMS_OUTPUT.PUT_LINE('Parama value is->  ' || pname);
+end;
+/
+
+exec hello_proc(" Hello World")
+
+----------------------------------------------------------
+
+create or replace procedure add_values(a in number,b in number,c out number)
+is
+declare
+begin
+c:=a+b;
+DBMS_OUTPUT.PUT_LINE('Add values Procedure is created');
+end;
+/
+
+
+sql> variable x number
+>exec add_values(10,20,:x)
+>print :x
+
+----------------------------------------------------------
+
+Question
+create procedure to increse the salary and update in the table
+
+soluation
+
+create or replace procedure  add_salary(e in number,amt in number,sal out number)
+is
+begin
+update emp set salary=salary+amt where empno=e;
+commit;
+select salary into sal from emp where empno=e;
+end;
+/
+
+sql> variable fsal number
+>exec add_salary(10,20,:fsal)
+>print :fsal
+
+
+----------------------------------------------------------
+Tea break
+
+
+
+Functions
+-----------------
+
+Sytax
+
+create or replace  function <name of function>( arg1  in/out <datatype,...etc)
+return  <data type>
+
+is/as
+<declaration 
+
+begin
+     statement
+exceptions
+      statements
+
+end;
+
+
+create or replace  function  say_hello_msg(pname in varchar2)
+return varchar2
+is
+begin
+return ('Welcome to NIIT ' || pname);
+END;
+/
+
+Type1
+
+SQLPLUS COMMAND PROMPT
+
+select say_hello_msg('Nageswara') from dual;
+
+Type 2
+
+variable msg varchar2(20);
+
+exec :msg := say_hello_msg('Nagaraj');
+print :msg
+
+Type 3
+
+ANOTHER plsql program
+
+ 1  declare
+  2  msg varchar2(250);
+  3  begin
+  4  msg:=say_hello_msg('Nageswara');
+  5  dbms_output.put_line('Welcome ' ||msg);
+  6* end;
+
+Type 4
+
+call in external applications like java...etc
+
+------------------------------------------------
+
+create or replace funcation tot_emp return number
+is
+total number(5):=0;
+begin
+select count(*) into total from employees;
+return total;
+end;
+/
+
+
+select tot_emp() from dual;
+--------------------------------------------
+
+
+add( 10,20,*) 200
+
+function calc(a number, b number, op char) return number
+is
+begin
+if op='+'then  return (a+b);
+elsif op='-'then  return (a-b);
+elsif op='*'then  return (a*b);
+else  return (a/b);
+endif
+end;
+/
+
+sql command
+
+select calc(10,20,'*') from dual;
+
+
+sql prompt
+
+variable k number
+
+execute :k := calc(20,40,'*')
+
+print :k
+
+------------------------------------------------
+
+Triggers
+
+
+Timing type
+
+1. Before
+2. after
+3. insted of
+
+Level
+
+1. Statement
+2. Row level
+
+Events
+
+DML (INSERT/UPDATE/DELETE)
+DDL (CREAE ALTER DROP TRUNCATE)
+
+Database Trigger
+
+login/logoff / start / shutdown
+------------------------------------
+
+
+
+CREATE [ OR REPLACE ] TRIGGER <trigger_name> 
+
+[BEFORE | AFTER | INSTEAD OF ]
+
+[INSERT | UPDATE | DELETE......]
+
+ON<name of underlying object>
+
+[FOR EACH ROW] 
+
+[WHEN<condition for trigger to get execute> ]
+
+DECLARE
+<Declaration part>
+BEGIN
+<Execution part> 
+EXCEPTION
+<Exception handling part> 
+END;
+
+Example1
+Statement Level Trigger
+
+create or replace trigger trigger1 before update on emp
+begin
+dbms_output.put_line(' Employee Record Updated');
+end;
+/
+
+
+example
+
+update emp set salary=salary * 1.5  where salary < 5000;
+update emp set salary=salary+5000 where empno=101;
+
+
+Example2
+Row Level Trigger
+
+create or replace trigger trigger2 before update on emp
+for each row
+begin
+dbms_output.put_line(' Employee  for each row Record Updated');
+end;
+/
+
+
+update emp set salary=salary * 1.5  where salary < 5000;
+update emp set salary=salary+5000 where empno=101;
+
+
+
+Example 3
+
+DDL Trigger
+
+
+create or replace trigger trigger3 
+before drop on hr.schema
+begin
+dbms_output.put_line('Table is.........dropped');
+end;
+/
+
+drop table customer;
+
+----------------------------------------------------------
+
+Case study1
+
+Account Table
+create table account(acno number(5) primary key,accname varchar2(20),balance number(10));
+
+Transaction Table
+
+create table transaction(tid number(5) primary key, accno number(5),tdate date, amount number(5),
+balance number(10));
+
+create sequence ac_seq;
+
+select sysdate from dual;
+
+
+create or replace trigger trigger4 
+before update on account for each row
+begin
+insert into transaction(tid,accno,tdate,amount,balance) values
+(ac_seq.nextval,:new:acno,sysdate,abs(:new.balance-:old.balance),:new.balance)'
+end;
+/
+
+
+Tx
+ update account set balance=balance+2000 where acno=1;
+
+Check the tables
+
+
+ ACNO ACCNAME                 BALANCE
+---------- -------------------- ----------
+         1 A                          3000
+         2 B                          2000
+         3 C                          3000
+         4 D                          4000
+
+Declare cursor
+
+open cursor
+
+fetch records
+
+close cursor
+
+syntax
+
+DECLARE
+CURSOR <cursor_name> IS <SELECT statement>
+<cursor_variable declaration>
+BEGIN
+OPEN <cursor_name>;
+FETCH <cursor_name> INTO <cursor_variable>;
+.
+.
+CLOSE <cursor_name>;
+END;
+
+
+declare
+
+i number:=0;
+begin
+loop
+dbms_output.put_line(i);
+i:=i+1;
+exit when i<10;
+end loop;
+end;
+/
+
+
+declare
+cursor c1 is select empname,salary from emp;
+tname emp.empname%type;
+tsal  emp.salary%type;
+begin
+open c1;
+loop
+fetch c1 into tname,tsal;
+exit when c1%notfound;
+dbms_output.put_line(tname ||' =>' || tsal);
+end loop;
+close c1;
+end;
+/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
